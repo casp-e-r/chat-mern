@@ -7,13 +7,13 @@ import View from './View/View';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App h-screen no-scrollbar">
       <BrowserRouter>
       <Routes>
 
     
      <Route exact path="/id" element={
-     <div className="flex flex-row  max-h-screen">
+     <div className="flex flex-row  h-5/6">
      <SideBar className='mob hidden sm:flex' />
      <ChatView className=''/>
      </div>

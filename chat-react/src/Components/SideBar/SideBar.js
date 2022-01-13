@@ -12,7 +12,7 @@ function SideBar() {
             <form className='my-4 bg-slate-700'>
                     <input type="text" className='bg-yellow-50 p-2'/>
                 </form>
-            <div className="pt-5 px-7 overflow-scroll h-5/6">
+            <div className="pt-5 px-7 overflow-scroll h-4/5">
                 
                 <NavLink to={'/id'}>
                 <li className='p-4 my-10 bg-gray-50 list-none backdrop-blur-lg backdrop-filter border border-gray-200 bg-opacity-60 bg-clip-padding shadow-lg rounded-xl'>     
