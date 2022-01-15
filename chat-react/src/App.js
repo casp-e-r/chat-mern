@@ -4,6 +4,7 @@ import ChatView from './Components/ChatScreen/ChatView';
 import SideBar from './Components/SideBar/SideBar';
 import {BrowserRouter ,Route, Redirect, Routes, useLocation} from "react-router-dom";
 import View from './View/View';
+import Login from './Components/Login';
 
 function App() {
   return (
@@ -22,7 +23,10 @@ function App() {
        <SideBar/>
        <ChatView/>
      </Route> */}
-      <Route exact path="/" element={<SideBar/>}></Route>
+      <Route exact path="/" 
+      element={<Login/>}>
+     
+      </Route>
       </Routes>
 
 
