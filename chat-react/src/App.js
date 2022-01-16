@@ -5,6 +5,9 @@ import SideBar from './Components/SideBar/SideBar';
 import {BrowserRouter ,Route, Redirect, Routes, useLocation} from "react-router-dom";
 import View from './View/View';
 import Login from './Components/Login';
+import Signup from './Components/Signup';
+import SignIn from './Components/SignIn';
+import Auth from './Components/Auth';
 
 function App() {
   return (
@@ -24,7 +27,7 @@ function App() {
        <ChatView/>
      </Route> */}
       <Route exact path="/" 
-      element={<Login/>}>
+      element={<Auth/>}>
      
       </Route>
       </Routes>

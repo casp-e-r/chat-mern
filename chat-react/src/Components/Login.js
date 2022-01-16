@@ -13,30 +13,50 @@ function Login() {
 
 	const handleSubmit = async () => {
        
-        if (signup) {
+    if (signup) {
+        
+    
             console.log('jj');
             if (!name || !email || !password) {
                 setError('fill all the fields');
+
                 return
             }
             try{
+                
+                
+                console.log('dddd');
                 const config = {
                     headers: {
                       "Content-type": "application/json",
                     },
                   };
-                  const { data } = await axios.post(
+                  console.log({
+                    name:name,
+                    email:email,
+                    password:password,
+                  });
+                  const {data}=await axios.post(
                     "/user",
                     {
-                      name,
-                      email,
-                      password,
+                     name,
+                     email,
+                     password
                     },
-                    config
+                    config,
+                    
                   );
-                  console.log('aaa done');
-            }catch(err){}
-        } else{
+        //  const {data}=await axios.post('/user',{name,email,password})
+
+                  console.log(data);
+                  return data;
+                 
+                
+                 
+            }catch(err){
+                console.log(err.response.status);
+            }
+        }else{
             if (!email || !password) {
                 setError('fill all the fields');
             }
@@ -48,11 +68,14 @@ function Login() {
                   };
                   const { data } = await axios.post(
                     "/user/login",
-                    {
-                      email,
-                      password,
+                    {data:{
+                        
+                        email,
+                        password,
+                    }
                     },
-                    config
+                    config,
+                    
                   );
                  
             }catch(err){}
@@ -80,7 +103,7 @@ function Login() {
 				<label>Password</label>
 				<input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required placeholder="••••••••" />
 			</div>
-			<button style={signup ? {backgroundColor: '#f0cf65'} : {backgroundColor: '#5887ff'}} disabled={loading}>{loading ? (signup ? 'Signing up...' : 'Logging In...') : (signup ? 'Create Account' : 'Log In')}</button>
+			<button type="submit" style={signup ? {backgroundColor: '#f0cf65'} : {backgroundColor: '#5887ff'}} disabled={loading}>{loading ? (signup ? 'Signing up...' : 'Logging In...') : (signup ? 'Create Account' : 'Log In')}</button>
 			{/* <button onClick={googleSignIn} className="google">Sign In with Google</button> */}
 			<p><span>{signup ? 'Already have an account?' : "Don't have an account?"}{' '}</span><b style={signup ? {color: '#5887ff'} : {color: '#f0cf65'}} onClick={()=>{if(!loading){setSignup(!signup)}}}>Sign Up Now.</b></p>
 		</motion.form>
