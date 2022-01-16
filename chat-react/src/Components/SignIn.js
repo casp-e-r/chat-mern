@@ -9,10 +9,18 @@ function SignIn() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
     const [signup, setSignup] = useState(false);
+	const [error, setError] = useState(null);
+
+
 
 
     const handleSubmit = async ()=>{
         console.log(email,password);
+        if (!email || !password) {
+            setError('fill all the fields');
+
+            return
+        }
         try{
             const config = {
                 headers: {
@@ -25,7 +33,7 @@ function SignIn() {
         }
         catch(err){
             console.log(err.response.status);
-            err.response.status===401 && console.log('inavlid email or password');
+            err.response.status===401 && setError('inavlid email or password');
         }
          
      }
@@ -33,6 +41,8 @@ function SignIn() {
         <div className=" m-5 grid gap-8 pt-20 pb-10">
             
 			<h3 className='my-1 text-pink-900'>signIn</h3>
+			{error && <p className="text-red-600">{error}</p>}
+
             <div className="grid">
             <label>Email</label>
             <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)}/>

@@ -6,9 +6,16 @@ function Signup() {
     const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [error, setError] = useState(null);
+
 
      const handleSubmit = async ()=>{
         console.log(name,email,password);
+        if (!name || !email || !password) {
+            setError('fill all the fields');
+
+            return
+        }
         try{
             const config = {
                 headers: {
@@ -20,7 +27,7 @@ function Signup() {
         }
         catch(err){
             console.log(err.response.status);
-            err.response.status===400 && console.log('user already exist');
+            err.response.status===400 && setError('user already exist');
         }
          
      }
@@ -29,6 +36,8 @@ function Signup() {
     return (
         <div className='m-5 grid gap-8 pt-20 pb-10'>
 			<h3 className='my-1 text-pink-900'>signUp</h3>
+			{error && <p className="text-red-600">{error}</p>}
+
 
             <div className='grid'>
             <label>Name</label>

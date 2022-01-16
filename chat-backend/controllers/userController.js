@@ -1,7 +1,22 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModels.js';
+import {generateToken} from '../config/generateToken.js'
+
 // const asyncHandler = require("express-async-handler");
 // const User = require("../models/userModel");
+const allUsers = asyncHandler(async (req, res) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { name: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  res.send(users);
+});
 
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password, picture } = req.body;
@@ -33,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
         email: user.email,
         isAdmin: user.isAdmin,
         picture: user.picture,
-        // token: generateToken(user._id),
+        token: generateToken(user._id),
       });
     } else {
       res.status(400);
@@ -52,11 +67,11 @@ const registerUser = asyncHandler(async (req, res) => {
         email: user.email,
         isAdmin: user.isAdmin,
         pic: user.pic,
-        // token: generateToken(user._id),
+        token: generateToken(user._id),
       });
     } else {
       res.status(401);
       throw new Error("Invalid Email or Password");
     }
   });
-  export  {registerUser,authUser};
+  export  {registerUser,authUser,allUsers};

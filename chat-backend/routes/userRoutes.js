@@ -1,5 +1,6 @@
 import express from 'express'
-import { registerUser,authUser} from '../controllers/userController.js'
+import { registerUser,authUser, allUsers} from '../controllers/userController.js'
+import { protect } from '../middleware/authMiddleware.js'
 
 // const express = require("express");
 // const {registerUser} = require("../controllers/userController");
@@ -7,8 +8,9 @@ import { registerUser,authUser} from '../controllers/userController.js'
 
 const router =express.Router()
 
-router.route("/").post(registerUser)
+router.route("/").post(registerUser).get(protect,allUsers)
 router.post("/login",authUser)
+
 
 export default router
 // module.exports = router
