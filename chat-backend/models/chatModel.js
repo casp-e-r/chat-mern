@@ -1,8 +1,9 @@
-import mongoose, { Mongoose } from 'mongoose'
+import mongoose from 'mongoose'
 // const mongoose = require("mongoose")
 
 const chatModel=mongoose.Schema({
     chatName: {type:String,trim:true},
+    isGroupChat: {type:Boolean,default:false},
     users:[{
         type:mongoose.Schema.Types.ObjectId,
         ref="user"
@@ -19,8 +20,8 @@ const chatModel=mongoose.Schema({
     timestamps:true,
 }
 )
-const chat=mongoose.model('chat',chatModel)
-export default chat
+const Chat=mongoose.model('chat',chatModel)
+export default Chat
 // module.exports=chat
     
     

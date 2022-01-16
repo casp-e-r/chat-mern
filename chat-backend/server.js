@@ -18,7 +18,7 @@ app.use(express.json());
 const port =process.env.PORT || 9000
 
 
-//middleware
+
 
 
 //db config
@@ -35,7 +35,11 @@ app.post('/',(req,res)=>{
     console.log(user)
 })
 app.use('/user',userRoutes)
-app.use(notFound)
+
+
+//middleware
+app.use(notFound);
+
 
 //listners
 app.listen(port, ()=>console.log(`listening on localhost :${port}`))

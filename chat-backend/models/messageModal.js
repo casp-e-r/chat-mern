@@ -8,6 +8,6 @@ const messageModal=mongoose.Schema({
 },{
     timestamps:true,
 })
-const message = mongoose.model('message',messageModal)
-export default message
+const Message = mongoose.model('message',messageModal)
+export default Message
 // module.exports =message
