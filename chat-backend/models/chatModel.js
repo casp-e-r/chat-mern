@@ -6,15 +6,15 @@ const chatModel=mongoose.Schema({
     isGroupChat: {type:Boolean,default:false},
     users:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref="user"
+        ref:"user"
     }],
     latestMessage:{
         type:mongoose.Schema.Types.ObjectId,
-        ref="message"
+        ref:"message"
     },
-    admin:{
+    groupAdmin:{
         type:mongoose.Schema.Types.ObjectId,
-        ref="user"
+        ref:"user"
     },
 },{
     timestamps:true,

@@ -5,6 +5,8 @@ import express from 'express'
 import mongoose from 'mongoose'
 import { notFound } from './middleware/errorMiddleware.js';
 import userRoutes from './routes/userRoutes.js'
+import chatRoutes from './routes/chatRoutes.js';
+import 'dotenv/config'
 
 
 // const express = require("express")
@@ -35,6 +37,8 @@ app.post('/',(req,res)=>{
     console.log(user)
 })
 app.use('/user',userRoutes)
+app.use('/chat',chatRoutes)
+
 
 
 //middleware

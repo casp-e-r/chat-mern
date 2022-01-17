@@ -1,6 +1,6 @@
 import express from 'express';
-import { accessChat, addToGroup, createGroupChat, fetchChats, removeFromGroup, renameGroup } from '../controllers/chatControllers';
-import { protect } from '../middleware/authMiddleware';
+import { accessChat, addToGroup, createGroupChat, fetchChats, removeFromGroup, renameGroup } from '../controllers/chatControllers.js';
+import { protect } from '../middleware/authMiddleware.js';
 
 
 

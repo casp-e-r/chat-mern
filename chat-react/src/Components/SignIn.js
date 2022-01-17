@@ -29,6 +29,7 @@ function SignIn() {
               };
               const {data}=await axios.post('/user/login',{email,password},config)
            alert('signin')
+           localStorage.setItem("userInfo", JSON.stringify(data));
             return console.log(data)
         }
         catch(err){

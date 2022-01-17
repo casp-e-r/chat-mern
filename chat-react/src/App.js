@@ -2,17 +2,28 @@
 import './App.css';
 import ChatView from './Components/ChatScreen/ChatView';
 import SideBar from './Components/SideBar/SideBar';
-import {BrowserRouter ,Route, Redirect, Routes, useLocation} from "react-router-dom";
+import {BrowserRouter ,Route, Redirect, Routes, useLocation, useNavigate} from "react-router-dom";
 import View from './View/View';
-import Login from './Components/Login';
-import Signup from './Components/Signup';
-import SignIn from './Components/SignIn';
+
 import Auth from './Components/Auth';
+import { useEffect, useState } from 'react';
+import ChatProvider from './ChatProvideContext';
 
 function App() {
+  
+  const [state, setState] = useState(false)
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+
+    if (user) 
+      setState(true)
+    // Navigate("/chats");
+  }, [state]);
+  console.log(state);
   return (
     <div className="App h-screen no-scrollbar">
       <BrowserRouter>
+      <ChatProvider>
       <Routes>
 
     
@@ -26,13 +37,17 @@ function App() {
        <SideBar/>
        <ChatView/>
      </Route> */}
-      <Route exact path="/" 
+      {/* <Route exact path="/" 
       element={<Auth/>}>
+     
+      </Route> */}
+      <Route exact path="/" 
+      element={state?<SideBar/>:<Auth/>}>
      
       </Route>
       </Routes>
 
-
+      </ChatProvider>
     </BrowserRouter>
     </div>
   );
