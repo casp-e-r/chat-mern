@@ -1,8 +1,13 @@
 import React from 'react'
+import { ChatState } from '../../ChatProvideContext';
 
 function ChatView() {
+    const { selectedChat } = ChatState();
+
+
+
     return (
-        <div className="absolute p-10 h-screen  z-40 md:relative md:flex-grow  w-full max-w-screen-2xl   bg-slate-300 ">
+        <div className={`absolute p-10 h-screen  z-40 md:relative md:flex-grow w-full max-w-screen-2xl bg-slate-300 ${selectedChat?"relative":"none"} `}>
             <div className=" p-10 bg-white">
                 <h1>header</h1>
             </div>

@@ -27,22 +27,15 @@ function App() {
       <Routes>
 
     
-     <Route exact path="/id" element={
+     {/* <Route exact path="/id" element={
      <div className="flex flex-row  h-5/6">
-     <SideBar className='mob hidden sm:flex' />
-     <ChatView className=''/>
+     <SideBar />
+     <ChatView />
      </div>
-     } />
-     {/* <Route exact path="/id">
-       <SideBar/>
-       <ChatView/>
-     </Route> */}
-      {/* <Route exact path="/" 
-      element={<Auth/>}>
+     } /> */}
      
-      </Route> */}
       <Route exact path="/" 
-      element={state?<SideBar/>:<Auth/>}>
+      element={state?<View/>:<Auth/>}>
      
       </Route>
       </Routes>

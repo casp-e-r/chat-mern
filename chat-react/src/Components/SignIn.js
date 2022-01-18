@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import {motion} from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -10,6 +11,7 @@ function SignIn() {
 	const [password, setPassword] = useState('');
     const [signup, setSignup] = useState(false);
 	const [error, setError] = useState(null);
+    const navigate=useNavigate();
 
 
 
@@ -30,6 +32,7 @@ function SignIn() {
               const {data}=await axios.post('/user/login',{email,password},config)
            alert('signin')
            localStorage.setItem("userInfo", JSON.stringify(data));
+           navigate('../',{replace:true})
             return console.log(data)
         }
         catch(err){
