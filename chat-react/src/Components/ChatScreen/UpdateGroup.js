@@ -1,14 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { ChatState } from '../../ChatProvideContext';
-import {motion} from 'framer-motion';
+
 
 
 function UpdateGroup() {
-    const variants={
-        open:{opacity:0,x:"-100%"},
-        close:{opacity:1, x:"-0%"}
-    }
+    
     const [groupChatName, setGroupChatName] = useState();
     const [renameloading, setRenameLoading] = useState(false);
     const [search, setSearch] = useState("");
@@ -135,51 +132,53 @@ function UpdateGroup() {
         }
         setGroupChatName("");
       }
+      console.log(groupButton);
       
     return (
-        // <motion.div 
-        // animate={{x:0,opacity:1}} initial={{x:10,opacity:1}} exit={{x:30,opacity:0}} 
-        <div
-        className={` z-50 bg-indigo-400 lg:p-10   h-full bottom-0 right-0   absolute
-         
-        `}>
-            <div className="grid gap-2 w-full">
+      
+        <div 
+        className={`top-0 right-0 absolute p-5 z-40 bg-indigo-800 h-full ease-in-out duration-300  ${groupButton ? "translate-x-0 " : "translate-x-full opacity-0 "}  `}>
+
+            <div className=" h-full w-full">
                 <button onClick={() =>setGroupButton(false)}>button</button>
-                <div className="w-full">
+                <div className="w-full flex flex-row p-4">
                     
-                    <div className="flex flex-row">
+              
                     <input type="text" placeholder="Gp Name"value={groupChatName}
                     onChange={(e) => setGroupChatName(e.target.value)} />
                     <button onClick={handleRename}>change</button>
-                    </div>
+                
                 </div>
-                <div>
-                    <input type="text" placeholder="add users"
+                <div className='p-4 peer relative '>
+                    <input type="text" className="peer" placeholder="add users"
                     value={search}
                      onChange={(e) => handleSearch(e.target.value)} />                    
-                </div> 
-
-                <div className="m-1  bg-slate-100 ">
-                    {selectedChat.users.map(u=>(
-                        <div className="flex flex-row">
-                            <p className="mx-1">{u.email}</p>
-                            {!(user.email===u.email) &&
-                            <button onClick={()=>handleRemove(u)}>X</button>}
-                        </div>
-                    ))}
-
-                </div>
-                <div>
+                <div className="  peer h-36 z-50 w-3/4 bg-indigo-600 peer-focus:block peer-hover:block">
                     {searchResult.map(u=>(
                         <p onClick={() =>handleAddUser(u)}>{u.email}</p>
                     ))}
                 </div>
-                <div>
+                </div> 
+
+                <div className="m-1  bg-slate-100 overflow-y-scroll h-1/2 ">
+                    {selectedChat.users.map(u=>(
+                        <div className="flex flex-row py-3">
+                            <p className="mx-1">{u.email}</p>
+                            {!(user.email===u.email) &&
+                            <button
+                             className='ml-auto'
+                             onClick={()=>handleRemove(u)}>X</button>}
+                        </div>
+                    ))}
+
+                </div>
+                
+                <div className='bottom-0 fixed p-10 w-full '>
                     <button>remove</button>
                 </div>
             </div>
         </div>
-        // </motion.div>
+       
 
     )
 }

@@ -3,9 +3,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import {NavLink, useNavigate} from "react-router-dom";
 import { ChatState } from '../../ChatProvideContext';
+import UpdateGroup from '../ChatScreen/UpdateGroup';
 import NewChat from './NewChat';
+import SearchUser from './SearchUser';
 function SideBar() {
-    const { user,fetching, chats, setChats,selectedChat,setSelectedChat } = ChatState();
+    const { user,fetching, chats, setChats,selectedChat,setSelectedChat,setSearchButton } = ChatState();
     const [loggedUser, setLoggedUser] = useState()
 
     // console.log(user,chats);
@@ -38,16 +40,20 @@ function SideBar() {
     catch{}
 
     } 
-
+  
     return (
         <div className={` w-full py-2 px-7 sm:max-w-screen-sm h-screen bg-slate-200 md:flex ${selectedChat ? 'hidden':'flex' } `}>
-            <div className='w-full'>           
+            <div className='w-full relative'>   
+            <SearchUser/>
             <div className="flex flex-grow mr-auto px-10  algn py-8 items-center">
                 <img src={''} alt='' className='w-14 h-14 border-2 border-gray-800 rounded-full'/>
-                <h1 className='pl-6'>Header hii</h1>
+                <h1 className='pl-6'>{user.name}  hii</h1>
+            <div className='px-10'>
+              <button onClick={()=>setSearchButton(true)}>iii</button>
             </div>
-            <div>
+            <div className='ml-auto'>
               <button onClick={logoutHandler}>logout</button>
+            </div>
             </div>
             <NewChat/>
             

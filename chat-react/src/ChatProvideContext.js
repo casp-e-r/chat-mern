@@ -10,6 +10,7 @@ const ChatProvider = ({ children }) => {
   const [chats, setChats] = useState([]);
   const [fetching, setFetching] = useState(false)
   const [groupButton, setGroupButton] = useState(false)
+  const [searchButton, setSearchButton] = useState(false)
   
 
   const Navigate = useNavigate();
@@ -38,7 +39,7 @@ const ChatProvider = ({ children }) => {
         fetching,
         setFetching,
         groupButton,
-        setGroupButton
+        setGroupButton,searchButton, setSearchButton
       }}
     >
       {children}

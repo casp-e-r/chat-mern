@@ -101,6 +101,7 @@ function NewChat() {
                 <button onClick={handleSubmit}>button</button>
                 
             </form>
+            
         </div>
     )
 }
