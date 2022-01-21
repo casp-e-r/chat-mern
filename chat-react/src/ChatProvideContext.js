@@ -11,6 +11,7 @@ const ChatProvider = ({ children }) => {
   const [fetching, setFetching] = useState(false)
   const [groupButton, setGroupButton] = useState(false)
   const [searchButton, setSearchButton] = useState(false)
+  const [modal, setModal] = useState(false)
   
 
   const Navigate = useNavigate();
@@ -39,7 +40,7 @@ const ChatProvider = ({ children }) => {
         fetching,
         setFetching,
         groupButton,
-        setGroupButton,searchButton, setSearchButton
+        setGroupButton,searchButton, setSearchButton,modal, setModal
       }}
     >
       {children}

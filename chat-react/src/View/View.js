@@ -3,6 +3,7 @@ import { ChatState } from '../ChatProvideContext.js'
 import Chat from '../Components/ChatScreen/Chat.js'
 import ChatView from '../Components/ChatScreen/ChatView.js'
 import SideBar from '../Components/SideBar/SideBar.js'
+import StarterPage from '../Components/StarterPage.js'
 import './View.js'
 
 function View() {
@@ -13,7 +14,7 @@ function View() {
             <SideBar/>
             {/* <ChatView/> */}
 
-            {selectedChat ? <Chat/>: <p className="hidden md:flex">select chat</p>}
+            {selectedChat ? <Chat/>: <StarterPage/>}
             
         </div>
     )

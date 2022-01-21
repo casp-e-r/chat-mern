@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { ChatState } from '../../ChatProvideContext'
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 function NewChat() {
     const [gpName, setGpName] = useState("")
@@ -9,7 +11,7 @@ function NewChat() {
     const [selUsers, setSelUsers] = useState([])
     const [loading, setLoading] = useState(false)
 
-    const { user, chats, setChats } = ChatState();
+    const { user, chats, setChats,modal,setModal } = ChatState();
 
     const handleSearch = async (query) => {
         setSearch(query);
@@ -67,7 +69,8 @@ function NewChat() {
           );
           console.log(data);
           setChats([data, ...chats]);
-        //   onClose();
+          setModal(false)
+       
           console.log('new gp created');
         } catch (error) {
             console.log(error);
@@ -75,34 +78,53 @@ function NewChat() {
         }
       };
 
+ const bg = {
+  
+  modal: {
+    backgroundColor: "#50C878",
+    borderRadius: "20px",
+  }
+  
+}
+
     return (
-        <div>
-            <form className='my-4 grid gap-3 text-center bg-slate-700'>
-                <div>
+        
+          <Modal   open={modal} onClose={()=>setModal(false)} center styles={bg} >
+              <div className='grid gap-3 p-4 max-w-md '>
+                
+                <h1>Create a new Group</h1>
+          
+            
+                <div className='grid'>
                     <label>chatname</label>
-                    <input type="text" value={gpName} onChange={(e)=>setGpName(e.target.value)} className='bg-yellow-500 p-2'/>
+                    <input type="text" value={gpName} onChange={(e)=>setGpName(e.target.value)} className='rounded-3xl p-2'/>
                 </div>
-                <div>
-                    <label>users</label>
-                    <input type="text" value={search} onChange={(e) => handleSearch(e.target.value)} className='bg-yellow-500 p-2'/>
-                </div>
-                <div className='flex bg-green-500 h-auto w-full p-4'>
+                <div className='flex bg-white w-full p-1 overflow-x-scroll'>
 
                 {selUsers.map(u=>(
-                    <h3 onClick={()=>handleDelete(u)} className=' mx-4'>{u.email}</h3>
+                    <h3 onClick={()=>handleDelete(u)} className='mx-20'>{u.email}</h3>
                 ))}
                 </div>
-                {loading?null:(
-                    searchResults.slice(0,3).map(u=>
-                        <p onClick={() => handleGroup(u)}>{u.email}</p>
-                        )
-                )}
+                <div className='grid '>
+                    <label>users</label>
+                    <input type="text" value={search} onChange={(e) => handleSearch(e.target.value)} className='rounded-3xl p-2'/>
+                </div>
+                {searchResults ? <div className='h-28 overflow-y-scroll w-full bg-transparent'>
 
-                <button onClick={handleSubmit}>button</button>
+                {loading?null:(
+                  searchResults.slice(0,3).map(u=>
+                    <p className='py-2' onClick={() => handleGroup(u)}>{u.email}</p>
+                    )
+                    )}
+                </div>:null}
+
+                <button onClick={handleSubmit}>create</button>
                 
-            </form>
             
-        </div>
+            </div>
+
+            </Modal>
+            
     )
 }
 

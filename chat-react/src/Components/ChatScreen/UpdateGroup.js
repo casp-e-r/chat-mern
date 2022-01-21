@@ -60,9 +60,12 @@ function UpdateGroup() {
           setLoading(false);
           setSearchResult(data);
         } catch (error) {
+          setSearchResult()
           console.log('error occured');
           setLoading(false);
         }
+     
+
       }
       const handleAddUser = async (user1) => {
         if (selectedChat.users.find((u) => u._id === user1._id)) {
@@ -137,7 +140,7 @@ function UpdateGroup() {
     return (
       
         <div 
-        className={`top-0 right-0 absolute p-5 z-40 bg-indigo-800 h-full ease-in-out duration-300  ${groupButton ? "translate-x-0 " : "translate-x-full opacity-0 "}  `}>
+        className={`top-0 right-0 rounded-lg shadow-xl absolute p-5 z-40 bg-emerald-200 h-full ease-in-out duration-300  ${groupButton ? "translate-x-0 " : "translate-x-full opacity-0 "}  `}>
 
             <div className=" h-full w-full">
                 <button onClick={() =>setGroupButton(false)}>button</button>

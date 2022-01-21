@@ -24,21 +24,15 @@ function App() {
     <div className="App h-screen no-scrollbar">
       <BrowserRouter>
       <ChatProvider>
-      <Routes>
+      {state?<View/>:<Auth/>}
+      {/* <Routes>
 
-    
-     {/* <Route exact path="/id" element={
-     <div className="flex flex-row  h-5/6">
-     <SideBar />
-     <ChatView />
-     </div>
-     } /> */}
      
       <Route exact path="/" 
       element={state?<View/>:<Auth/>}>
      
       </Route>
-      </Routes>
+      </Routes> */}
 
       </ChatProvider>
     </BrowserRouter>
