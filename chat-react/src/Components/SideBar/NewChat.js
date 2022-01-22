@@ -30,9 +30,7 @@ function NewChat() {
         //   console.log(data);
           setLoading(false);
           setSearchResults(data);
-        } catch (error) {
-          
-        }
+        } catch (error) { }
       }
 
       const handleGroup = (userToAdd) => {
@@ -79,12 +77,10 @@ function NewChat() {
       };
 
  const bg = {
-  
   modal: {
     backgroundColor: "#50C878",
     borderRadius: "20px",
   }
-  
 }
 
     return (
@@ -93,18 +89,18 @@ function NewChat() {
               <div className='grid gap-3 p-4 max-w-md '>
                 
                 <h1>Create a new Group</h1>
-          
             
                 <div className='grid'>
                     <label>chatname</label>
                     <input type="text" value={gpName} onChange={(e)=>setGpName(e.target.value)} className='rounded-3xl p-2'/>
                 </div>
-                <div className='flex bg-white w-full p-1 overflow-x-scroll'>
 
+                <div className='flex bg-white w-full p-1 overflow-x-scroll'>
                 {selUsers.map(u=>(
                     <h3 onClick={()=>handleDelete(u)} className='mx-20'>{u.email}</h3>
                 ))}
                 </div>
+
                 <div className='grid '>
                     <label>users</label>
                     <input type="text" value={search} onChange={(e) => handleSearch(e.target.value)} className='rounded-3xl p-2'/>
@@ -120,11 +116,8 @@ function NewChat() {
 
                 <button onClick={handleSubmit}>create</button>
                 
-            
             </div>
-
-            </Modal>
-            
+          </Modal>           
     )
 }
 

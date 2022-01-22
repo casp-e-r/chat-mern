@@ -6,6 +6,8 @@ import mongoose from 'mongoose'
 import { notFound } from './middleware/errorMiddleware.js';
 import userRoutes from './routes/userRoutes.js'
 import chatRoutes from './routes/chatRoutes.js';
+import messageRoutes from './routes/messageRoutes.js';
+
 import 'dotenv/config'
 
 
@@ -38,6 +40,8 @@ app.post('/',(req,res)=>{
 })
 app.use('/user',userRoutes)
 app.use('/chat',chatRoutes)
+app.use('/message',messageRoutes)
+
 
 
 

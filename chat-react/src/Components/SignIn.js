@@ -43,25 +43,20 @@ function SignIn() {
      }
     return (
         <div className=" m-5 grid gap-8 pt-20 pb-10">
-            
 			<h3 className='my-1 text-pink-900'>signIn</h3>
 			{error && <p className="text-red-600">{error}</p>}
 
             <div className="grid">
-            <label>Email</label>
-            <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                <label>Email</label>
+                <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)}/>
             </div>
             
             <div className='grid'>
-            <label>password</label>
-            <input type="text" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-            </div>
-                
-            
-            
+                <label>password</label>
+                <input type="text" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+            </div>    
             <button className='bg-white p-5 '
-            onClick={handleSubmit}>sigggggn</button>
-          
+                onClick={handleSubmit}>sigggggn</button>  
         </div>
     )
 }

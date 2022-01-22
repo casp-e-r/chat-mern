@@ -2,10 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { ChatState } from '../../ChatProvideContext';
 
-
-
 function UpdateGroup() {
-    
     const [groupChatName, setGroupChatName] = useState();
     const [renameloading, setRenameLoading] = useState(false);
     const [search, setSearch] = useState("");
@@ -14,7 +11,6 @@ function UpdateGroup() {
     const { selectedChat, setSelectedChat,user,fetching,setFetching,groupButton,setGroupButton } = ChatState();
     const handleRename = async () => {
         if (!groupChatName) return;
-    
         try {
           setRenameLoading(true);
           const config = {
@@ -30,9 +26,7 @@ function UpdateGroup() {
             },
             config
           );
-    
           console.log(data._id);
-          // setSelectedChat("");
           setSelectedChat(data);
           setFetching(!fetching);
           setRenameLoading(false);
@@ -64,8 +58,6 @@ function UpdateGroup() {
           console.log('error occured');
           setLoading(false);
         }
-     
-
       }
       const handleAddUser = async (user1) => {
         if (selectedChat.users.find((u) => u._id === user1._id)) {
@@ -92,7 +84,6 @@ function UpdateGroup() {
             },
             config
           );
-    
           setSelectedChat(data);
           setFetching(!fetching);
           setLoading(false);
@@ -124,7 +115,7 @@ function UpdateGroup() {
             },
             config
           );
-    
+
           user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
           setFetching(!fetching);
         //   fetchMessages();
@@ -135,34 +126,26 @@ function UpdateGroup() {
         }
         setGroupChatName("");
       }
-      console.log(groupButton);
       
     return (
-      
-        <div 
-        className={`top-0 right-0 rounded-lg shadow-xl absolute p-5 z-40 bg-emerald-200 h-full ease-in-out duration-300  ${groupButton ? "translate-x-0 " : "translate-x-full opacity-0 "}  `}>
-
+        <div className={`top-0 right-0 rounded-lg shadow-xl absolute p-5 z-40 bg-emerald-200 h-full ease-in-out duration-300  ${groupButton ? "translate-x-0 " : "translate-x-full opacity-0 "}  `}>
             <div className=" h-full w-full">
                 <button onClick={() =>setGroupButton(false)}>button</button>
                 <div className="w-full flex flex-row p-4">
-                    
-              
                     <input type="text" placeholder="Gp Name"value={groupChatName}
                     onChange={(e) => setGroupChatName(e.target.value)} />
                     <button onClick={handleRename}>change</button>
-                
                 </div>
                 <div className='p-4 peer relative '>
                     <input type="text" className="peer" placeholder="add users"
                     value={search}
                      onChange={(e) => handleSearch(e.target.value)} />                    
-                <div className="  peer h-36 z-50 w-3/4 bg-indigo-600 peer-focus:block peer-hover:block">
-                    {searchResult.map(u=>(
-                        <p onClick={() =>handleAddUser(u)}>{u.email}</p>
-                    ))}
-                </div>
+                    <div className="  peer h-36 z-50 w-3/4 bg-indigo-600 peer-focus:block peer-hover:block">
+                      {searchResult.map(u=>(
+                          <p onClick={() =>handleAddUser(u)}>{u.email}</p>
+                      ))}
+                    </div>
                 </div> 
-
                 <div className="m-1  bg-slate-100 overflow-y-scroll h-1/2 ">
                     {selectedChat.users.map(u=>(
                         <div className="flex flex-row py-3">
@@ -173,7 +156,6 @@ function UpdateGroup() {
                              onClick={()=>handleRemove(u)}>X</button>}
                         </div>
                     ))}
-
                 </div>
                 
                 <div className='bottom-0 fixed p-10 w-full '>
@@ -181,9 +163,6 @@ function UpdateGroup() {
                 </div>
             </div>
         </div>
-       
-
     )
 }
-
 export default UpdateGroup

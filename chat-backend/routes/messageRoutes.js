@@ -1,17 +1,15 @@
-// import express from 'express'
+import express from 'express'
+import { allMessages, sendMessage } from '../controllers/messageControllers.js'
+import { protect } from '../middleware/authMiddleware.js'
 // import message from '../models/messageModal'
 
 
-// const router =express.Router()
+const router =express.Router()
 
-// router.post('/new',(req,res)=>{
-//     const newMessage = new message({ 
-//         msg: req.body
-//     })
-//     try{
-//         console.log(newMessage)
-//     }
-//     catch(err){
-//         res.status(500).json(err)
-//     }
-// })
+router.route('/').post(protect,sendMessage)
+router.route('/:chatId').get(protect,allMessages)
+
+
+export default router
+
+

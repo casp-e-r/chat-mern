@@ -11,15 +11,11 @@ function Chat() {
         // return()=>setGroupButton(false)
     })
     
-    
-   
-
 
     return (
-        <div className={` p-2 sm:p-5 md:p-10 h-screen overflow-x-hidden z-30 md:flex-grow w-full max-w-screen-2xl  md:flex ${selectedChat?"flex":"none"} `}>
+    <div className={` p-2 sm:p-5 md:p-10 h-screen overflow-x-hidden z-30 md:flex-grow w-full max-w-screen-2xl  md:flex ${selectedChat?"flex":"none"} `}>
         <div className="rounded-3xl w-full z-40 p-3 relative flex flex-col bg-emerald-100 bg-opacity-90">
-        <UpdateGroup/>
-
+            <UpdateGroup/>
             <div className=" rounded-3xl px-10 py-5 bg-white flex">
                 <h1>{selectedChat.chatName}</h1>
                 <div className="ml-auto">
@@ -38,10 +34,9 @@ function Chat() {
                     <input type='text' className='w-full  fex flex-grow mx-3  rounded-2xl ' />
                     <button type='submit' className='rounded-xl bg-teal-400 p-2 mx-2'>send</button>
                 </form>
-
             </div>
         </div>
-        </div>
+    </div>
     )
 }
 

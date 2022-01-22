@@ -55,7 +55,6 @@ function Signup() {
             </div>
             
             <button className='border-l-pink-300 p-5 '
-            
             onClick={handleSubmit}>sigggggn</button>
         </div>
     )
