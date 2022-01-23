@@ -8,6 +8,8 @@ import View from './View/View';
 import Auth from './Components/Auth';
 import { useEffect, useState } from 'react';
 import ChatProvider from './ChatProvideContext';
+import Chat from './Components/ChatScreen/Chat';
+import StarterPage from './Components/StarterPage';
 
 function App() {
   
@@ -25,14 +27,30 @@ function App() {
       <BrowserRouter>
       <ChatProvider>
       {state?<View/>:<Auth/>}
-      {/* <Routes>
+      
 
-     
+     {/* {state ? 
+      <Routes>
       <Route exact path="/" 
-      element={state?<View/>:<Auth/>}>
+      element={
+      <div className="flex flex-row">
+          <SideBar/>
+          <StarterPage/>
+      </div>
+      }/>
      
-      </Route>
-      </Routes> */}
+      <Route exact path="/:chatId" element={
+        <div className="flex flex-row">
+
+        <SideBar/>
+        <Chat/>
+        </div>
+      } />
+      </Routes>
+      :
+      <Auth/>
+      
+      } */}
 
       </ChatProvider>
     </BrowserRouter>

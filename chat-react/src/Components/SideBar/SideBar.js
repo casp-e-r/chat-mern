@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import {NavLink, useNavigate} from "react-router-dom";
+import {Navigate, NavLink, useNavigate} from "react-router-dom";
 import { ChatState } from '../../ChatProvideContext';
 import NewChat from './NewChat';
 import SearchUser from './SearchUser';
@@ -23,7 +23,7 @@ function SideBar() {
           const { data } = await axios.get("/chat", config);
           setChats(data);
         } catch (error) {
-          console.log('failed to load chats');
+          console.log('failed to load chats',error);
         }
       };
       useEffect(() => {
@@ -38,7 +38,15 @@ function SideBar() {
       navigate('../',{replace:true})
     }
     catch{}
-    } 
+  } 
+  // console.log(selectedChat);
+  // const handleChat=async (chat)=>{
+  //   try{
+  //      await  setSelectedChat(chat)
+  //      navigate(`/${chat._id}`,{replace:false})
+  //   }
+  //   catch{}
+  // }
   
     return (
         <div className={` w-full p-4 sm:p-10 sm:max-w-screen-sm h-screen  md:flex ${selectedChat ? 'hidden':'flex' } `}>
@@ -62,14 +70,11 @@ function SideBar() {
               <NewChat/>
             
               <div className="pt-5 px-7 overflow-scroll h-4/5">
-                {/* <NavLink to={'/id'}>
-                <li className='p-4 my-10 bg-gray-50 list-none backdrop-blur-lg backdrop-filter border border-gray-200 bg-opacity-60 bg-clip-padding shadow-lg rounded-xl'>     
-                    <h1>chat</h1>
-                </li>
-                </NavLink> */}
-                {chats.map(chat =>
                
-                <li onClick={() => {setSelectedChat(chat);setGroupButton(false)}} 
+                {chats.map(chat =>
+                <li 
+                // onClick={()=>handleChat(chat)}
+                onClick={() => {setSelectedChat(chat);setGroupButton(false)}} 
                 className='p-4 my-10 bg-gray-50 list-none backdrop-blur-lg backdrop-filter border border-gray-200 bg-opacity-60 bg-clip-padding shadow-lg rounded-xl'>     
                     <h1>{chat.chatName}</h1>
                 </li>
