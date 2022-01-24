@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react'
+
 import Message from './Message'
 import { ChatState } from '../../ChatProvideContext';
 import UpdateGroup from './UpdateGroup';
@@ -14,6 +14,13 @@ function Chat() {
     const typingHandler = (e) => {
         setNewMessage(e.target.value);
     }
+    const ref = useRef()
+    const scrollToBottom = () => {
+        ref.current?.scrollIntoView({behavior: "auto"})
+      }
+    useEffect(() => {
+        scrollToBottom();
+    },[messages])
     
     const fetchMessages = async () => {
         if (!selectedChat) return;
@@ -39,7 +46,7 @@ function Chat() {
           console.log('failed to load messages',error);
         }
       };
-      console.log(messages);
+    //   console.log(messages);
      
       const sendMessage = async (e) => {
           e.preventDefault();
@@ -68,7 +75,10 @@ function Chat() {
             console.log('failed to send message',error);
         }
       };
-      
+      useEffect(() => {
+        fetchMessages();
+    
+      }, [selectedChat]);
         // if (!socketConnected) return;
     
         // if (!typing) {
@@ -89,22 +99,28 @@ function Chat() {
     
 
     return (
-    <div className={` p-2 sm:p-5 md:p-10 h-screen overflow-x-hidden z-30 md:flex-grow w-full max-w-screen-2xl  md:flex ${selectedChat?"flex":"none"} `}>
-        <div className="rounded-3xl w-full z-40 p-3 relative flex flex-col bg-emerald-100 bg-opacity-90">
+    <div className={`  sm:p-5 md:p-10 h-screen overflow-x-hidden z-30 md:flex-grow w-full max-w-screen-2xl  md:flex ${selectedChat?"flex":"none"} `}>
+        <div className="sm:rounded-3xl w-full z-40 p-3 relative flex flex-col bg-emerald-100 bg-opacity-90 h-full">
             <UpdateGroup/>
-            <div className=" rounded-3xl px-10 py-5 bg-white flex">
+            <div className=" rounded-3xl  px-10 py-5 bg-white flex">
                 <h1>{selectedChat.chatName}</h1>
                 <div className="ml-auto">
                     <button onClick={()=>setGroupButton(true)}>hhh</button>    
                 </div>
             </div>
 
-            <div className="flex-col px-3 flex-1 h-3/4 overflow-scroll">
-                <div className="bg-white w-fit  rounded-tr-full rounded-br-full rounded-tl-full py-2 px-5 my-10">message </div>
-                <div className=" float-right my-10 bg-cyan-500 w-fit  rounded-tr-full rounded-bl-full rounded-tl-full py-2 px-5">message </div>
-            </div>
+            {loading?<div className="flex-col px-3 flex-1 overflow-x-scroll align-text-bottom ">loading...</div>
+            :
+            <div className="flex-col px-3 my-1 flex-1 overflow-x-scroll align-text-bottom ">
+                
+                {messages?.map((m,i)=>
+                   <Message message={m}/>
+                )}
+                <p ref={ref} className=" sticky bottom-0"></p>
+            </div>}
 
-            <div className="px-10 w-11/12   absolute bottom-10 mt-auto  text-right bg-slate-400">
+
+            <div className="px-10 w-11/12 mt-2  bottom-10 mt-auto  text-right bg-slate-400">
                 <form onSubmit={sendMessage} className="flex h-full" >
                     <button onClick={fetchMessages}>image</button>
                     <input type='text' value={newMessage}  onChange={typingHandler}  className='w-full  fex flex-grow mx-3  rounded-2xl ' />

@@ -125,6 +125,8 @@ function UpdateGroup() {
           setLoading(false);
         }
         setGroupChatName("");
+       
+        
       }
       
     return (
