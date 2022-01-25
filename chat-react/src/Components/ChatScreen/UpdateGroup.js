@@ -125,8 +125,6 @@ function UpdateGroup() {
           setLoading(false);
         }
         setGroupChatName("");
-       
-        
       }
       
     return (
@@ -152,11 +150,12 @@ function UpdateGroup() {
                     {selectedChat.users.map(u=>(
                         <div className="flex flex-row py-3">
                             <p className="mx-1">{u.email}</p>
-                            {!(user.email===u.email) &&
+                            {!(user.email===u.email) && !(u.email===selectedChat.groupAdmin.email)  &&
                             <button
                              className='ml-auto'
                              onClick={()=>handleRemove(u)}>X</button>}
                         </div>
+                        
                     ))}
                 </div>
                 

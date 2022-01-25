@@ -9,7 +9,7 @@ import SearchUser from './SearchUser';
 function SideBar() {
     const { user,fetching, chats,
             setChats,selectedChat,setSelectedChat,
-            setSearchButton,setModal,modal,setGroupButton } = ChatState();
+            setSearchButton,setModal,modal,setGroupButton,notification } = ChatState();
     const [loggedUser, setLoggedUser] = useState()
     // console.log(user,chats);
     const fetchChats = async () => {
@@ -39,7 +39,8 @@ function SideBar() {
     }
     catch{}
   } 
-  // console.log(selectedChat);
+  // console.log(notification);
+ 
   // const handleChat=async (chat)=>{
   //   try{
   //      await  setSelectedChat(chat)
@@ -49,8 +50,8 @@ function SideBar() {
   // }
   
     return (
-        <div className={` w-full p-4 sm:p-10 sm:max-w-screen-sm h-screen  md:flex ${selectedChat ? 'hidden':'flex' } `}>
-            <div className='w-full p-2 sm:p-3 relative bg-emerald-100 rounded-3xl'>   
+        <div className={` w-full sm:p-5 md:p-7   lg:p-10 sm:max-w-screen-sm h-screen  md:flex ${selectedChat ? 'hidden':'flex' } `}>
+            <div className='w-full p-2 sm:p-3 relative bg-emerald-100 sm:rounded-3xl'>   
               <SearchUser/>
               <div className='rounded-3xl grid  md:px-4 lg:px-6  py-2 bg-neutral-50'>
 

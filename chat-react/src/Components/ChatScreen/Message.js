@@ -5,7 +5,6 @@ import { ChatState } from '../../ChatProvideContext';
 
 function Message({message}) {
   const { selectedChat,user ,setSelectedChat,setGroupButton,groupButton } = ChatState();
- console.log(message);
 
   return (
     <div className="grid w-full ">

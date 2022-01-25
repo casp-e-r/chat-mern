@@ -13,20 +13,23 @@ import StarterPage from './Components/StarterPage';
 
 function App() {
   
-  const [state, setState] = useState(false)
+  const [state, setState] = useState(0)
+  
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
 
     if (user) 
-      setState(true)
+      setState(1)
+    else
+      setState(0)
     // Navigate("/chats");
-  }, [state]);
+  }, [setState,state]);
   console.log(state);
   return (
     <div className="App h-screen no-scrollbar">
       <BrowserRouter>
       <ChatProvider>
-      {state?<View/>:<Auth/>}
+      {state ? <View/> : <Auth/>}
       
 
      {/* {state ? 
