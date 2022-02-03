@@ -21,10 +21,11 @@ const ChatProvider = ({ children }) => {
     setUser(userInfo);
 
     
+    // if (!userInfo) Navigate('/')
 
     // if (!userInfo) Navigate.push("/");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Navigate]);
+  }, []);
 
   return (
     <ChatContext.Provider

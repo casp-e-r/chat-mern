@@ -1,10 +1,17 @@
 import { motion } from 'framer-motion'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SignIn from './SignIn'
 import Signup from './Signup'
 
 function Auth() {
     const [state, setState] = useState(0)
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+    useEffect(() => {
+        if (user) {
+            return
+        }
+    }, [user]);
+    
     return (
         <div className="flex justify-center content-center align-middle min-h-1/2 h-screen ">
             <motion.div

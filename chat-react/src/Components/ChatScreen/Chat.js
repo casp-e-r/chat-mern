@@ -20,25 +20,13 @@ function Chat() {
     const [isTyping, setIsTyping] = useState(false);
    
     
-    const ref = useRef()
-    const scrollToBottom = () => {
-        ref.current?.scrollIntoView({behavior: "smooth"})
-        
-      }
-    const scrollToEnd=()=>{
-        var chatList = document.getElementById("chatList");
-        chatList.scrollTop = chatList.offsetHeight;
-      }
-
-    useEffect(() => {
-      scrollToEnd()
-    },[]);
+    const scrollerRef = useRef(null)
     
-    useEffect(() => {
-        scrollToBottom();
-        // scrollToEnd();
+    
 
-    },[messages])
+    
+    
+
     const fetchMessages = async () => {
         if (!selectedChat) return;
     
@@ -48,16 +36,13 @@ function Chat() {
               Authorization: `Bearer ${user.token}`,
             },
           };
-    
           setLoading(true);
-    
           const { data } = await axios.get(
             `/message/${selectedChat._id}`,
             config
           );
           setMessages(data);
           setLoading(false);
-    
           socket.emit("join chat", selectedChat._id);
         } catch (error) {
           console.log('failed to load messages',error);
@@ -117,7 +102,6 @@ function Chat() {
         socket.on("connected", () => setSocketConnected(true));
         socket.on("typing", () => setIsTyping(true));
         socket.on("stop typing", () => setIsTyping(false));
-    
         // eslint-disable-next-line
       }, []);
 
@@ -136,19 +120,17 @@ function Chat() {
           {
             if (!notification.includes(newMessageRecieved)) {
               setNotification([newMessageRecieved, ...notification]);
-              
               setFetching(!fetching);
-            
             }
-
           } 
           else {
             setMessages([...messages, newMessageRecieved]);
           }
         });
-      });
-      
-    
+      }); 
+      useEffect(() => {
+        scrollerRef.current?.scrollIntoView() 
+      },[messages,selectedChat]);
     
 
     return (
@@ -161,16 +143,15 @@ function Chat() {
                     <button onClick={()=>setGroupButton(true)}>hhh</button>    
                 </div>
             </div>
-
             {loading?<div className="flex-col px-3 flex-1 overflow-x-scroll align-text-bottom ">loading...</div>
             :
             <div id="chatList" className="flex flex-col px-3 py-3 my-1 flex-1 overflow-x-scroll align-text-bottom ">                
                 {messages?.map((m,i)=>
                    <Message message={m}/>
                 )}
-                <p ref={ref} className="relative bottom-0">k</p>
+                <div ref={scrollerRef} />
             </div>}
-                  {isTyping && <p>nnnn</p>}
+            {isTyping && <p>typing..</p>}
             <div className="px-10 w-11/12 mt-2  bottom-10 mt-auto  text-right bg-slate-400">
                 <form onSubmit={sendMessage} className="flex h-full" >
                     <button onClick={fetchMessages}>image</button>

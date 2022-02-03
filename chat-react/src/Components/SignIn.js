@@ -13,7 +13,9 @@ function SignIn() {
 	const [error, setError] = useState(null);
     const navigate=useNavigate();
 
-
+    // useEffect(() => {
+    //     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    // },[])
 
 
     const handleSubmit = async ()=>{
@@ -30,9 +32,9 @@ function SignIn() {
                 },
               };
               const {data}=await axios.post('/user/login',{email,password},config)
-           alert('signin')
-           localStorage.setItem("userInfo", JSON.stringify(data));
-           navigate('../',{replace:true})
+              localStorage.setItem("userInfo", JSON.stringify(data));
+              window.location.reload();
+            //   navigate('../',{replace:true})
             return console.log(data)
         }
         catch(err){

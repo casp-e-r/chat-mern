@@ -136,16 +136,16 @@ function UpdateGroup() {
                     onChange={(e) => setGroupChatName(e.target.value)} />
                     <button onClick={handleRename}>change</button>
                 </div>
-                <div className='p-4 peer relative '>
+                {selectedChat.groupAdmin.email === user.email && <div className='p-4 peer relative '>
                     <input type="text" className="peer" placeholder="add users"
                     value={search}
                      onChange={(e) => handleSearch(e.target.value)} />                    
-                    <div className="  peer h-36 z-50 w-3/4 bg-indigo-600 peer-focus:block peer-hover:block">
+                     <div className="  peer h-36 z-50 w-3/4 bg-indigo-600 peer-focus:block peer-hover:block">
                       {searchResult.map(u=>(
                           <p onClick={() =>handleAddUser(u)}>{u.email}</p>
                       ))}
                     </div>
-                </div> 
+                </div> }
                 <div className="m-1  bg-slate-100 overflow-y-scroll h-1/2 ">
                     {selectedChat.users.map(u=>(
                         <div className="flex flex-row py-3">
@@ -154,8 +154,7 @@ function UpdateGroup() {
                             <button
                              className='ml-auto'
                              onClick={()=>handleRemove(u)}>X</button>}
-                        </div>
-                        
+                        </div>   
                     ))}
                 </div>
                 

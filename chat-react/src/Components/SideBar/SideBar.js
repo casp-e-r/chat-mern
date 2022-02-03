@@ -35,7 +35,9 @@ function SideBar() {
 
     const logoutHandler=async ()=>{
       try{localStorage.removeItem("userInfo");
-      navigate('../',{replace:true})
+      window.location.reload();
+
+      // navigate('../',{replace:true})
     }
     catch{}
   } 

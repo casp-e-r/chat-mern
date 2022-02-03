@@ -11,49 +11,30 @@ import ChatProvider from './ChatProvideContext';
 import Chat from './Components/ChatScreen/Chat';
 import StarterPage from './Components/StarterPage';
 
+
 function App() {
   
   const [state, setState] = useState(0)
+  const user = JSON.parse(localStorage.getItem("userInfo"));
+  
   
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("userInfo"));
+    // const user = JSON.parse(localStorage.getItem("userInfo"));
 
     if (user) 
       setState(1)
+      
     else
       setState(0)
     // Navigate("/chats");
-  }, [setState,state]);
+  }, []);
   console.log(state);
   return (
     <div className="App h-screen no-scrollbar">
       <BrowserRouter>
       <ChatProvider>
       {state ? <View/> : <Auth/>}
-      
-
-     {/* {state ? 
-      <Routes>
-      <Route exact path="/" 
-      element={
-      <div className="flex flex-row">
-          <SideBar/>
-          <StarterPage/>
-      </div>
-      }/>
-     
-      <Route exact path="/:chatId" element={
-        <div className="flex flex-row">
-
-        <SideBar/>
-        <Chat/>
-        </div>
-      } />
-      </Routes>
-      :
-      <Auth/>
-      
-      } */}
+    
 
       </ChatProvider>
     </BrowserRouter>
