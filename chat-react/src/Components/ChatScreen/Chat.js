@@ -23,7 +23,7 @@ function Chat() {
     const scrollerRef = useRef(null)
     
     
-
+    
     
     
 
@@ -109,6 +109,9 @@ function Chat() {
         fetchMessages();
         selectedChatCompare=selectedChat
       }, [selectedChat]);
+      useEffect(() => {
+        scrollerRef.current?.scrollIntoView() 
+      },[messages]);
 
       useEffect(() => {
         socket.on("message recieved", (newMessageRecieved) => {
@@ -128,16 +131,14 @@ function Chat() {
           }
         });
       }); 
-      useEffect(() => {
-        scrollerRef.current?.scrollIntoView() 
-      },[messages,selectedChat]);
+      
     
 
     return (
-    <div className={`  sm:p-5 md:p-7 lg:p-10 h-screen overflow-x-hidden z-30 md:flex-grow w-full max-w-screen-2xl  md:flex ${selectedChat?"flex":"none"} `}>
-        <div className="sm:rounded-3xl w-full z-40 p-3 relative flex flex-col bg-emerald-100 bg-opacity-90 h-full">
+    <div className={` sm:p-5 md:p-7 lg:p-10 h-screen overflow-x-hidden z-30 md:flex-grow w-full max-w-screen-2xl  md:flex ${selectedChat?"flex":"none"} `}>
+        <div className="sm:rounded-lg w-full z-40 p-3 relative flex flex-col bg-emerald/10 backdrop-blur-lg backdrop-filter bg-clip-padding shadow-lg bg-opacity-30 h-full">
             <UpdateGroup/>
-            <div className=" rounded-3xl  px-10 py-5 bg-white flex">
+            <div className=" rounded-lg  px-10 py-5 bg-gradient-to-r from-green-400/50 to-lime-400/50 flex">
                 <h1>{selectedChat.chatName}</h1>
                 <div className="ml-auto">
                     <button onClick={()=>setGroupButton(true)}>hhh</button>    
@@ -152,11 +153,12 @@ function Chat() {
                 <div ref={scrollerRef} />
             </div>}
             {isTyping && <p>typing..</p>}
-            <div className="px-10 w-11/12 mt-2  bottom-10 mt-auto  text-right bg-slate-400">
+            <div className="px-7 mt-2 bottom-10 text-right">
                 <form onSubmit={sendMessage} className="flex h-full" >
-                    <button onClick={fetchMessages}>image</button>
-                    <input type='text' value={newMessage}  onChange={typingHandler}  className='w-full  fex flex-grow mx-3  rounded-2xl ' />
-                    <button type='submit'   className='rounded-xl bg-teal-400 p-2 mx-2'>send</button>
+                  <div className="bg-gradient-to-r from-green-400/30 to-lime-400/30 px-px py-px rounded-2xl w-full mr-1 ">
+                    <input type='text' value={newMessage}  onChange={typingHandler}  className='w-full h-full outline-none bg-white  fex flex-grow rounded-2xl ' />
+                  </div>
+                    <button type='submit'   className='rounded-xl bg-teal-400 p-2 '>send</button>
                 </form>
             </div>
         </div>

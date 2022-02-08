@@ -86,7 +86,7 @@ function NewChat() {
     return (
         
           <Modal   open={modal} onClose={()=>setModal(false)} center styles={bg} >
-              <div className='grid gap-3 p-4 max-w-md '>
+              <div className='grid gap-3 p-4 max-w-md w-96'>
                 
                 <h1>Create a new Group</h1>
             
@@ -95,11 +95,14 @@ function NewChat() {
                     <input type="text" value={gpName} onChange={(e)=>setGpName(e.target.value)} className='rounded-3xl p-2'/>
                 </div>
 
-                <div className='flex bg-white w-full p-1 overflow-x-scroll'>
+                {selUsers.length>0 && <div className=' flex bg-white w-full rounded-3xl overflow-x-scroll'>
                 {selUsers.map(u=>(
-                    <h3 onClick={()=>handleDelete(u)} className='mx-20'>{u.email}</h3>
+                  <div className=''>
+                    <h3 onClick={()=>handleDelete(u)} className='mx-3 '>{u.email}</h3>
+                    
+                    </div>
                 ))}
-                </div>
+                </div>}
 
                 <div className='grid '>
                     <label>users</label>

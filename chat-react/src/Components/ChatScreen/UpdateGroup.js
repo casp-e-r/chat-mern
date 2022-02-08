@@ -59,6 +59,17 @@ function UpdateGroup() {
           setLoading(false);
         }
       }
+      // const clearChat=async()=>{
+      //   console.log('why');
+      //   try {
+          
+      //     const { data } = await axios.put(`/message/${selectedChat._id}`)
+      //     console.log(data);
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+        
+      // }
       const handleAddUser = async (user1) => {
         if (selectedChat.users.find((u) => u._id === user1._id)) {
           console.log('user already in ');
@@ -128,7 +139,7 @@ function UpdateGroup() {
       }
       
     return (
-        <div className={`top-0 right-0 rounded-lg shadow-xl absolute p-5 z-40 bg-emerald-200 h-full ease-in-out duration-300  ${groupButton ? "translate-x-0 " : "translate-x-full opacity-0 "}  `}>
+        <div className={`top-0 right-0 rounded shadow-xl absolute p-5 z-40 bg-emerald-200 h-full ease-in-out duration-300  ${groupButton ? "translate-x-0 " : "translate-x-full opacity-0 "}  `}>
             <div className=" h-full w-full">
                 <button onClick={() =>setGroupButton(false)}>button</button>
                 <div className="w-full flex flex-row p-4">
@@ -157,6 +168,9 @@ function UpdateGroup() {
                         </div>   
                     ))}
                 </div>
+                {/* <button onClick={clearChat}>
+                  clearchat
+                </button> */}
                 
                 <div className='bottom-0 fixed p-10 w-full '>
                     <button>remove</button>

@@ -8,10 +8,12 @@ import SearchUser from './SearchUser';
 
 function SideBar() {
     const { user,fetching, chats,
-            setChats,selectedChat,setSelectedChat,
+            setChats,selectedChat,setSelectedChat,searchButton,
             setSearchButton,setModal,modal,setGroupButton,notification } = ChatState();
     const [loggedUser, setLoggedUser] = useState()
-    // console.log(user,chats);
+    
+
+    console.log(searchButton);
     const fetchChats = async () => {
         // console.log(user._id);
         try {
@@ -52,12 +54,17 @@ function SideBar() {
   // }
   
     return (
-        <div className={` w-full sm:p-5 md:p-7   lg:p-10 sm:max-w-screen-sm h-screen  md:flex ${selectedChat ? 'hidden':'flex' } `}>
-            <div className='w-full p-2 sm:p-3 relative bg-emerald-100 sm:rounded-3xl'>   
+        <div className={` w-full sm:p-5 md:p-7   lg:p-10 sm:max-w-screen-sm h-screen  md:flex ${selectedChat ? 'hidden':'flex' }  `}>
+            <div 
+            onClick={()=>searchButton && setSearchButton(false)}
+            className='w-full p-2 sm:p-3 relative bg-gradient-to-r from-green-400/50 to-lime-400/50 sm:rounded-lg backdrop-blur-lg backdrop-filter bg-clip-padding shadow-lg'>   
               <SearchUser/>
-              <div className='rounded-3xl grid  md:px-4 lg:px-6  py-2 bg-neutral-50'>
+              <div className='py-5'>
+                <h1>Search</h1> 
+              </div>
+              <div className='rounded-lg grid  md:px-4 lg:px-6  py-2 bg-green-50 backdrop-brightness-75 backdrop-blur-lg backdrop-filter bg-clip-padding shadow-lg'>
 
-                <div className="rounded-3xl flex flex-grow mr-auto w-full px-5  lg:px-10 py-4 sm:py-6 md:py-7 items-center ">
+                <div className="rounded-lg flex flex-grow mr-auto w-full px-5  lg:px-10 py-4 sm:py-6 md:py-7 items-center ">
                   <img src={''} alt='' className='w-14 h-14 border-2 border-gray-800 rounded-full'/>
                   <h1 className='pl-6'>{user.name}  hii</h1>
                   <div className='ml-auto'>
@@ -72,14 +79,14 @@ function SideBar() {
 
               <NewChat/>
             
-              <div className="pt-5 px-7 overflow-scroll h-4/5">
+              <div className=" px-7 overflow-scroll h-3/4">
                
                 {chats.map(chat =>
                 <li 
                 // onClick={()=>handleChat(chat)}
                 onClick={() => {setSelectedChat(chat);setGroupButton(false)}} 
-                className='p-4 my-10 bg-gray-50 list-none backdrop-blur-lg backdrop-filter border border-gray-200 bg-opacity-60 bg-clip-padding shadow-lg rounded-xl'>     
-                    <h1>{chat.chatName}</h1>
+                className='p-4 cursor-pointer hover:bg-black/5 my-10 bg-white/5 list-none backdrop-blur-lg backdrop-filter border border-black/5  bg-clip-padding shadow-lg rounded-xl'>     
+                    <h1 className=''>{chat.chatName}</h1>
                 </li>
                 )}     
               </div>

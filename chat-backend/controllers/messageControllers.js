@@ -8,8 +8,9 @@ const allMessages = asyncHandler(async (req, res) => {
     try {
       const messages = await Message.find({ chat: req.params.chatId })
         .populate("sender", "name pic email")
-        .populate("chat");
+        .populate("chat","id");
       res.json(messages);
+      console.log(messages);
     } catch (error) {
       res.status(400);
       throw new Error(error.message);
@@ -49,7 +50,17 @@ const sendMessage = asyncHandler(async (req, res) => {
       throw new Error(error.message);
     }
   });
+  const clearChat=asyncHandler(async (req, res) => {
+    try {
+      const messages = await Message.deleteMany({ chat: req.params.chatId })
+        
+      res.json(messages);
+    } catch (error) {
+      res.status(400);
+      throw new Error(error.message);
+    }
+  })
 
 
 
-export {sendMessage ,allMessages}
+export {sendMessage ,allMessages,clearChat}

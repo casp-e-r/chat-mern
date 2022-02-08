@@ -173,4 +173,5 @@ const accessChat = asyncHandler(async (req, res) => {
       res.json(removed);
     }
   });
+  
   export {accessChat,fetchChats,createGroupChat,renameGroup,addToGroup,removeFromGroup};

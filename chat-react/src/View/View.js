@@ -21,7 +21,7 @@ function View() {
     
     return (
         
-        <div className="flex flex-row  h-5/6">
+        <div className="flex flex-row bg-emerald-100/10  ">
             
             <SideBar/>
             {selectedChat ? <Chat/>: <StarterPage/>}
