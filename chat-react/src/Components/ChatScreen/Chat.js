@@ -5,6 +5,7 @@ import Message from './Message'
 import { ChatState } from '../../ChatProvideContext';
 import UpdateGroup from './UpdateGroup';
 import io from "socket.io-client";
+import { MdSend } from 'react-icons/md';
 
 const ENDPOINT="http://localhost:9000"
 var socket,selectedChatCompare
@@ -131,14 +132,14 @@ function Chat() {
           }
         });
       }); 
-      
+      console.log(selectedChat);
     
 
     return (
     <div className={` sm:p-5 md:p-7 lg:p-10 h-screen overflow-x-hidden z-30 md:flex-grow w-full max-w-screen-2xl  md:flex ${selectedChat?"flex":"none"} `}>
-        <div className="sm:rounded-lg w-full z-40 p-3 relative flex flex-col bg-emerald/10 backdrop-blur-lg backdrop-filter bg-clip-padding shadow-lg bg-opacity-30 h-full">
-            <UpdateGroup/>
-            <div className=" rounded-lg  px-10 py-5 bg-gradient-to-r from-green-400/50 to-lime-400/50 flex">
+        <div className="sm:rounded-lg w-full z-40 p-3 relative flex flex-col bg-emerald-100/10 backdrop-blur-lg backdrop-filter bg-clip-padding shadow-lg bg-opacity-30 h-full">
+            {selectedChat.isGroupChat && <UpdateGroup/>}
+            <div className=" rounded-lg  px-10 py-5 bg-gradient-to-l from-green-400/50 to-lime-500/50 flex">
                 <h1>{selectedChat.chatName}</h1>
                 <div className="ml-auto">
                     <button onClick={()=>setGroupButton(true)}>hhh</button>    
@@ -146,19 +147,19 @@ function Chat() {
             </div>
             {loading?<div className="flex-col px-3 flex-1 overflow-x-scroll align-text-bottom ">loading...</div>
             :
-            <div id="chatList" className="flex flex-col px-3 py-3 my-1 flex-1 overflow-x-scroll align-text-bottom ">                
+            <div id="chatList" className="flex  flex-col px-3 py-3 my-1 flex-1 overflow-x-scroll align-text-bottom ">                
                 {messages?.map((m,i)=>
                    <Message message={m}/>
                 )}
                 <div ref={scrollerRef} />
             </div>}
             {isTyping && <p>typing..</p>}
-            <div className="px-7 mt-2 bottom-10 text-right">
+            <div className="px-7 py-5 mt-2 bottom-10 bg-gradient-to-l rounded-lg from-green-400/50 to-lime-500/50 text-right">
                 <form onSubmit={sendMessage} className="flex h-full" >
-                  <div className="bg-gradient-to-r from-green-400/30 to-lime-400/30 px-px py-px rounded-2xl w-full mr-1 ">
-                    <input type='text' value={newMessage}  onChange={typingHandler}  className='w-full h-full outline-none bg-white  fex flex-grow rounded-2xl ' />
+                  <div className="bg-gradient-to-r from-green-400/50 to-lime-400/50 p-1 rounded-2xl w-full mr-1 ">
+                    <input type='text' value={newMessage}  onChange={typingHandler}  className='w-full h-full outline-none bg-white px-5  fex flex-grow rounded-2xl ' />
                   </div>
-                    <button type='submit'   className='rounded-xl bg-teal-400 p-2 '>send</button>
+                    <button type='submit'   className='rounded-xl bg-teal-400 p-2 '><MdSend className='text-white'/></button>
                 </form>
             </div>
         </div>

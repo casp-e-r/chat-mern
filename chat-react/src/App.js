@@ -23,12 +23,11 @@ function App() {
 
     if (user) 
       setState(1)
-      
     else
       setState(0)
     // Navigate("/chats");
   }, []);
-  console.log(state);
+  
   return (
     <div className="App h-screen no-scrollbar">
       <BrowserRouter>

@@ -30,7 +30,7 @@ const accessChat = asyncHandler(async (req, res) => {
       res.send(isChat[0]);
     } else {
       var chatData = {
-        chatName: "sender",
+        chatName:"sender-one_to_one",
         isGroupChat: false,
         users: [req.user._id, userId],
       };

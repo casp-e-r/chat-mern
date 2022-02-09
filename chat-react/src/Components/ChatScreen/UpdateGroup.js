@@ -137,7 +137,7 @@ function UpdateGroup() {
         }
         setGroupChatName("");
       }
-      
+    
     return (
         <div className={`top-0 right-0 rounded shadow-xl absolute p-5 z-40 bg-emerald-200 h-full ease-in-out duration-300  ${groupButton ? "translate-x-0 " : "translate-x-full opacity-0 "}  `}>
             <div className=" h-full w-full">
@@ -147,7 +147,8 @@ function UpdateGroup() {
                     onChange={(e) => setGroupChatName(e.target.value)} />
                     <button onClick={handleRename}>change</button>
                 </div>
-                {selectedChat.groupAdmin.email === user.email && <div className='p-4 peer relative '>
+                {user.email === selectedChat.groupAdmin.email && 
+                <div className='p-4 peer relative '>
                     <input type="text" className="peer" placeholder="add users"
                     value={search}
                      onChange={(e) => handleSearch(e.target.value)} />                    
@@ -156,7 +157,8 @@ function UpdateGroup() {
                           <p onClick={() =>handleAddUser(u)}>{u.email}</p>
                       ))}
                     </div>
-                </div> }
+                </div> 
+                 } 
                 <div className="m-1  bg-slate-100 overflow-y-scroll h-1/2 ">
                     {selectedChat.users.map(u=>(
                         <div className="flex flex-row py-3">
