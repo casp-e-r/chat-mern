@@ -139,8 +139,8 @@ function UpdateGroup() {
       }
     
     return (
-        <div className={`top-0 right-0 rounded shadow-xl absolute p-5 z-40 bg-emerald-200 h-full ease-in-out duration-300  ${groupButton ? "translate-x-0 " : "translate-x-full opacity-0 "}  `}>
-            <div className=" h-full w-full">
+        <div className={`top-0 right-0 rounded-lg shadow-[-24px_1px_15px_-15px_rgba(163,230,53,0.5)] absolute p-5 z-40 bg-green-300 h-full ease-in-out duration-300  ${groupButton ? "translate-x-0 " : "translate-x-full opacity-0 "}  `}>
+            <div className=" h-full w-full ">
                 <button onClick={() =>setGroupButton(false)}>button</button>
                 <div className="w-full flex flex-row p-4">
                     <input type="text" placeholder="Gp Name"value={groupChatName}

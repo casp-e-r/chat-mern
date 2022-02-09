@@ -97,7 +97,7 @@ function SideBar() {
                 // onClick={()=>handleChat(chat)}
                 onClick={() => {setSelectedChat(chat);setGroupButton(false)}} 
                 className='p-4 cursor-pointer hover:bg-black/5 my-10 bg-white/5 list-none backdrop-blur-lg backdrop-filter border border-black/5  bg-clip-padding shadow-lg rounded-xl'>     
-                    <h1 className=''>{chat.isGroupChat ? chat.chatName : 'myrr'}</h1>
+                    <h1 className=''>{chat.isGroupChat ? chat.chatName : (chat.users.map(u=>{if(u.email!==user.email) return u.name}))}</h1>
                 </li>
                 )}     
               </div>
